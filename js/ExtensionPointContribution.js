@@ -17,6 +17,7 @@ function ExtensionPointContribution() {
     // private properties - do not use
     this._private = {};
     this._private.onshowCallback = undefined;
+    this._private.onhideCallback = undefined;
 }
 
 /**
@@ -83,9 +84,30 @@ ExtensionPointContribution.prototype.onShow = function(onshow) {
  * Trigger the onShow callback, if one was registered.
  * @param containerElement The DOM element containing the content that was shown.
  */
-ExtensionPointContribution.prototype.triggerOnShow = function(containerElement) {
+ExtensionPointContribution.prototype.show = function(containerElement) {
+    if (!containerElement) {
+        throw 'Call to ExtensionPointContribution.show() without specifying a "containerElement".';
+    } 
     if (this._private.onshowCallback) {
         this._private.onshowCallback.call(containerElement);
+    }
+    return this;
+};
+
+/**
+ * Set the callback function to be called after the contribution content is to be "undisplayed".
+ */
+ExtensionPointContribution.prototype.onHide = function(onhide) {
+    this._private.onhideCallback = onhide;
+    return this;
+};
+
+/**
+ * Trigger the onHide callback, if one was registered.
+ */
+ExtensionPointContribution.prototype.hide = function() {
+    if (this._private.onhideCallback) {
+        this._private.onhideCallback.call();
     }
     return this;
 };

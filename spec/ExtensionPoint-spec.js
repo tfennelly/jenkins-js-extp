@@ -96,7 +96,7 @@ describe("extension/ExtensionPoint-spec", function () {
                     // extension point a chance to enrich the displayed content e.g. 
                     // by making a REST API call etc. 
                     contentContainer.append(theContribution.content);
-                    theContribution.triggerOnShow(contentContainer.get());
+                    theContribution.show(contentContainer.get());
                 });
                 
                 // Mimic a user clicking on the widget
