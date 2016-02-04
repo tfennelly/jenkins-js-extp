@@ -49,9 +49,7 @@ ExtensionPoint.prototype.contribute = function(contribution) {
     // Fire the oncontribute callback if one was supplied.
     var extensionPoint = this;
     if (extensionPoint._private.oncontributeCallback) {
-        setTimeout(function() {
-            extensionPoint._private.oncontributeCallback.call(contribution);
-        }, 0);
+        extensionPoint._private.oncontributeCallback.call(contribution);
     } 
 };
 
